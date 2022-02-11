@@ -33,7 +33,7 @@ class SectionsContainer extends Component {
     this.handleResize();
     window.addEventListener('resize', this.handleResize);
 
-    if (!this.props.scrollBar) {
+    if (!this.props.scrollBar & this.props.allowScrolling) {
       this.addCSS3Scroll();
       this.handleAnchor(); 
 
@@ -404,7 +404,8 @@ SectionsContainer.defaultProps = {
   sectionPaddingBottom: '0',
   arrowNavigation: true,
   activeSection: 0,
-  touchNavigation: true
+  touchNavigation: true,
+  allowScrolling: true
 };
 
 SectionsContainer.propTypes = {
@@ -422,7 +423,8 @@ SectionsContainer.propTypes = {
   sectionPaddingBottom: PropTypes.string,
   arrowNavigation: PropTypes.bool,
   activeSection: PropTypes.number,
-  touchNavigation: PropTypes.bool
+  touchNavigation: PropTypes.bool,
+  allowScrolling: PropTypes.bool
 };
 
 SectionsContainer.childContextTypes = {
