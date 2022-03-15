@@ -290,21 +290,6 @@ var SectionsContainer = function (_Component) {
 
       this.handleResize();
       window.addEventListener('resize', this.handleResize);
-
-      if (!this.props.scrollBar & this.props.allowScrolling) {
-        this.addCSS3Scroll();
-        this.handleAnchor();
-
-        window.addEventListener('hashchange', this.handleAnchor, false);
-
-        if (this.props.arrowNavigation) {
-          window.addEventListener('keydown', this.handleArrowKeys);
-        }
-
-        if (this.props.touchNavigation) {
-          this.handleTouchNav();
-        }
-      }
     }
   }, {
     key: 'componentWillReceiveProps',
@@ -357,7 +342,6 @@ SectionsContainer.defaultProps = {
   arrowNavigation: true,
   activeSection: 0,
   touchNavigation: true,
-  allowScrolling: true
 };
 
 SectionsContainer.propTypes = {
@@ -376,7 +360,6 @@ SectionsContainer.propTypes = {
   arrowNavigation: _propTypes2.default.bool,
   activeSection: _propTypes2.default.number,
   touchNavigation: _propTypes2.default.bool,
-  allowScrolling: _propTypes2.default.bool
 };
 
 SectionsContainer.childContextTypes = {
