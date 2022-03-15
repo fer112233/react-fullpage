@@ -157,8 +157,8 @@ var SectionsContainer = function (_Component) {
           elapsedTime = void 0,
           startTime = void 0,
           handleswipe = function handleswipe(swipedir) {
-        console.log(swipedir);
-      };
+            console.log(swipedir);
+          };
 
       touchsurface.addEventListener('touchstart', function (e) {
         var touchobj = e.changedTouches[0];
@@ -256,11 +256,11 @@ var SectionsContainer = function (_Component) {
       });
 
       return _react2.default.createElement(
-        'div',
-        {
-          className: _this.props.navigationClass || 'Navigation',
-          style: _this.props.navigationClass ? null : navigationStyle },
-        anchors
+          'div',
+          {
+            className: _this.props.navigationClass || 'Navigation',
+            style: _this.props.navigationClass ? null : navigationStyle },
+          anchors
       );
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
@@ -290,6 +290,21 @@ var SectionsContainer = function (_Component) {
 
       this.handleResize();
       window.addEventListener('resize', this.handleResize);
+
+      if (!this.props.scrollBar) {
+
+        this.handleAnchor();
+
+        window.addEventListener('hashchange', this.handleAnchor, false);
+
+        if (this.props.arrowNavigation) {
+          window.addEventListener('keydown', this.handleArrowKeys);
+        }
+
+        if (this.props.touchNavigation) {
+          this.handleTouchNav();
+        }
+      }
     }
   }, {
     key: 'componentWillReceiveProps',
@@ -312,14 +327,14 @@ var SectionsContainer = function (_Component) {
         transition: 'all ' + this.props.delay + 'ms ease'
       };
       return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
           'div',
-          { className: this.props.className, style: containerStyle },
-          this.props.scrollBar ? this.addChildrenWithAnchorId() : this.props.children
-        ),
-        this.props.navigation && !this.props.scrollBar ? this.renderNavigation() : null
+          null,
+          _react2.default.createElement(
+              'div',
+              { className: this.props.className, style: containerStyle },
+              this.props.scrollBar ? this.addChildrenWithAnchorId() : this.props.children
+          ),
+          this.props.navigation && !this.props.scrollBar ? this.renderNavigation() : null
       );
     }
   }]);
@@ -342,6 +357,7 @@ SectionsContainer.defaultProps = {
   arrowNavigation: true,
   activeSection: 0,
   touchNavigation: true,
+  allowScrolling: true
 };
 
 SectionsContainer.propTypes = {
@@ -360,6 +376,7 @@ SectionsContainer.propTypes = {
   arrowNavigation: _propTypes2.default.bool,
   activeSection: _propTypes2.default.number,
   touchNavigation: _propTypes2.default.bool,
+  allowScrolling: _propTypes2.default.bool
 };
 
 SectionsContainer.childContextTypes = {
